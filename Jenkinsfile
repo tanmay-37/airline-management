@@ -75,7 +75,7 @@ pipeline {
     }
     post {
         always {
-            node {
+            node('any') {  // specify 'any' as the label
                 junit '**/target/surefire-reports/*.xml'
             }
         }
