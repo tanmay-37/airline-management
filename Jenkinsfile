@@ -8,7 +8,7 @@ pipeline {
     environment {
         JAR_NAME = "airline-0.0.1-SNAPSHOT.jar"
         REMOTE_USER = "ec2-user"
-        REMOTE_HOST = "your-ec2-public-dns" // TODO: Replace with your EC2 public DNS
+        REMOTE_HOST = "ec2-13-200-215-205.ap-south-1.compute.amazonaws.com" // TODO: Replace with your EC2 public DNS
         REMOTE_PATH = "/home/ec2-user/airline"
         SSH_KEY = credentials('ec2-ssh-key')
     }
@@ -75,7 +75,9 @@ pipeline {
     }
     post {
         always {
-            junit 'target/surefire-reports/*.xml'
+            node {
+                junit '**/target/surefire-reports/*.xml'
+            }
         }
     }
 }
